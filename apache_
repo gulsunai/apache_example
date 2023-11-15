@@ -1,4 +1,12 @@
- File "<ipython-input-1-7b3dd091ec55>", line 2
-    RewriteEngine On
-                  ^
-SyntaxError: invalid syntax
+# Включаем модуль mod_rewrite
+RewriteEngine On
+
+# Определяем правило для перенаправления с корня на index.php
+RewriteRule ^$ /index.php [L]
+
+# Определяем правило для перенаправления запросов на контроллеры и действия
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/([^/]+)$ /index.php?controller=$1&action=$2 [QSA,L]
+
+# Дополнительные правила можно добавить по мере необходимости
